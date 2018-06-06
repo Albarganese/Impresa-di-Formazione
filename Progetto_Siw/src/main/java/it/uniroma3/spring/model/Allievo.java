@@ -1,58 +1,47 @@
 package it.uniroma3.spring.model;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+
 
 @Entity
+@Table(name="allievo")
 public class Allievo {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull
-	private String nome;
-	
-	@NotNull
-	private String cognome;
-	
-	@NotNull
-	private String email;
-	
-	@NotNull
-	private Number telefono;
-	
-	@NotNull
-	private Date datanascita;
-	
-	@NotNull
-	private String luogonascita;
-	
-	@ManyToMany(mappedBy="allievo")
-	private List<Attivita> attivitaregistrate;
-	
-	public Allievo() {
-		
-	}
-	
-	public Allievo(String nome, String cognome, String email, Number telefono,
-			Date datanascita, String luogonascita) {
-		this.nome = nome;
-		this.cognome = cognome;
-		this.email = email;
-		this.telefono = telefono;
-		this.datanascita = datanascita;
-		this.luogonascita = luogonascita;
-		
-	}
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+	@Column(nullable=false)
+    private String nome;
+
+	@Column(nullable=false)
+    private String cognome;
+
+	@Column(nullable=false)
+    private Date dataDiNascita;
+	
+	@Column(nullable=false)
+    private String luogoDiNascita;
+	
+	@Column(nullable=true)
+    private String telefono;
+	
+	@Column(nullable=true)
+    private String email;
+
+	public Allievo() {}
+	
+	public Allievo(String nome, String cognome, Date dataDiNascita,String luogoDiNascita, String telefono, String email) {
+		this.nome=nome;
+		this.cognome=cognome;
+		this.dataDiNascita=dataDiNascita;
+		this.luogoDiNascita=luogoDiNascita;
+		this.telefono=telefono;
+		this.email=email;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -77,6 +66,30 @@ public class Allievo {
 		this.cognome = cognome;
 	}
 
+	public Date getDataDiNascita() {
+		return dataDiNascita;
+	}
+
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
+	}
+
+	public String getLuogoDiNascita() {
+		return luogoDiNascita;
+	}
+
+	public void setLuogoDiNascita(String luogoDiNascita) {
+		this.luogoDiNascita = luogoDiNascita;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -85,42 +98,10 @@ public class Allievo {
 		this.email = email;
 	}
 
-	public Number getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(Number telefono) {
-		this.telefono = telefono;
-	}
-
-	public Date getDatanascita() {
-		return datanascita;
-	}
-
-	public void setDatanascita(Date datanascita) {
-		this.datanascita = datanascita;
-	}
-
-	public String getLuogonascita() {
-		return luogonascita;
-	}
-
-	public void setLuogonascita(String luogonascita) {
-		this.luogonascita = luogonascita;
-	}
-	public List<Attivita> getAttivita() {
-		return attivitaregistrate;
-	}
-
-	public void setEsami(List<Attivita> attivitaregistrate) {
-		this.attivitaregistrate = attivitaregistrate;
-	}
-	
 	@Override
 	public String toString() {
-		return this.nome + " " + this.cognome;
-		
+		return "Allievo [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", dataDiNascita=" + dataDiNascita
+				+ ", luogoDiNascita=" + luogoDiNascita + ", telefono=" + telefono + ", email=" + email + "]";
 	}
-	
 	
 }
